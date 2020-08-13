@@ -1,20 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    generate();
+    array = generate();
 });
 
-generate = function() {
-    let g = new Generator(100);
-    let array = g.generate();
+let array = [];
 
-    let r = new Renderer(array);
-    r.show();
+generate = function() {
+    let g = new Generator(50);
+    let array = g.generate();
+    new Renderer(array).show();
+
+    return array;
 }
 
 document.getElementById('generate-others').addEventListener('click', function() {
     document.getElementById('container').innerHTML = '';
-    generate();
+    array = generate();
 });
 
 document.getElementById('sort').addEventListener('click', function() {
-
+    new QuickSort(array).sort();
 });
