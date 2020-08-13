@@ -4,55 +4,52 @@ class QuickSort {
     }
 
     sort = function() {
-        this.quickSort(this.array, 0, this.array.length - 1);
-        console.log(this.array);
+        //this.quickSort(this.array, 0, this.array.length - 1);
+        this.swap(0, 1);
+        this.swap(1, 2);
+        //console.log(this.array);
     }
 
     quickSort = function(array, low, high) {
-        if (low < high) {
-            let p = this.partition(array, low, high);
-            this.quickSort(array, low, p - 1);
-            this.quickSort(array, p + 1, high);
-        }
-    }
-
-    partition = function(array, low, high) {
-        document.getElementById(array[high].id).style.backgroundColor = 'red';
-        let pivote = array[high].value;
+        let pivote = array[high];
         let i = low;
+        let j = high;
 
-        for (let j = low; j < high; j++) {
-            if (array[j].value < pivote) {
-                this.swap(j, i);
-                i += 1;
+        while (i < j) {
+            while (array[i].value <= pivote.value && i < j) i++;
+            while (array[j].value > pivote.value) j--;
+            if (i < j) {
+                this.swap(i, j);
             }
         }
 
-        document.getElementById(array[high].id).style.backgroundColor = 'blue';
+        document.getElementById(this.array[j].id).style.transitionDuration = '1s';
+        document.getElementById(this.array[j].id).style.marginLeft = this.array[low].positionX + 'px';
+        array[low] = array[j];
+        array[j] = pivote;
+        document.getElementById(pivote.id).style.transitionDuration = '1s';
+        document.getElementById(pivote.id).style.marginLeft = this.array[j].positionX + 'px';
 
-        this.swap(i, high);
-        return i;
+        if (low < j - 1) {
+            this.quickSort(array, low, j - 1);
+        }
+        if (j + 1 < high) {
+            this.quickSort(array, j + 1, high);
+        }
     }
 
-    swap = async function(firstElement, secondElement) {
-        let temp = this.array[firstElement];
-        
+    swap = function(firstElement, secondElement) {
+        let aux = JSON.parse(JSON.stringify(this.array[firstElement]));
+        let aux2 = JSON.parse(JSON.stringify(this.array[secondElement]));
+
         document.getElementById(this.array[firstElement].id).style.transitionDuration = '1s';
-        document.getElementById(this.array[firstElement].id).style.marginLeft = this.array[secondElement].positionX + 'px';
-
-        await this.sleep(1000);
-
-        this.array[firstElement] = this.array[secondElement];
-
+        document.getElementById(this.array[firstElement].id).style.marginLeft = aux2.positionX + 'px';
         document.getElementById(this.array[secondElement].id).style.transitionDuration = '1s';
-        document.getElementById(this.array[secondElement].id).style.marginLeft = temp.positionX + 'px';
+        document.getElementById(this.array[secondElement].id).style.marginLeft = aux.positionX + 'px';
 
-        await this.sleep(1000);
-
-        this.array[secondElement] = temp;
-    }
-
-    sleep = function (ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        this.array[firstElement] = JSON.parse(JSON.stringify(aux2));
+        this.array[firstElement].positionX = aux.positionX;
+        this.array[secondElement] = JSON.parse(JSON.stringify(aux));
+        this.array[secondElement].positionX = aux2.positionX;
     }
 }
