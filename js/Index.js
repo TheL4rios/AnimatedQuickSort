@@ -1,31 +1,20 @@
-let getRandomNumber = function (min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+document.addEventListener('DOMContentLoaded', function() {
+    generate();
+});
+
+generate = function() {
+    let g = new Generator(100);
+    let array = g.generate();
+
+    let r = new Renderer(array);
+    r.show();
 }
 
-let getHeight = function(number) {
-    let topBar = document.getElementById('bar');
-    let bottomContainer = document.getElementById('button-container');
+document.getElementById('generate-others').addEventListener('click', function() {
+    document.getElementById('container').innerHTML = '';
+    generate();
+});
 
-    let positionBar = topBar.getBoundingClientRect();
-    let positionContainer = bottomContainer.getBoundingClientRect();
+document.getElementById('sort').addEventListener('click', function() {
 
-    let total = positionContainer.top - positionBar.bottom;
-
-    return number * total / maxNumber;
-}
-
-let totalNumber = getRandomNumber(1, 100);
-let array = [];
-
-let positionX = 0;
-let maxNumber = 1000;
-
-for (let i = 0; i < totalNumber; i++) {
-    let rndNumber = getRandomNumber(0, maxNumber);
-    let height = getHeight(rndNumber);
-    array.push(new Line(positionX, rndNumber, height, i));
-    positionX += 24;
-}
-
-let r = new Renderer(array);
-r.show();
+});
