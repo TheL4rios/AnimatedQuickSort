@@ -46,9 +46,9 @@ class QuickSort {
         let aux = JSON.parse(JSON.stringify(this.array[firstElement]));
         let aux2 = JSON.parse(JSON.stringify(this.array[secondElement]));
 
-        document.getElementById(this.array[firstElement].id).style.transitionDuration = '1s';
+        //document.getElementById(this.array[firstElement].id).style.transitionDuration = '1s';
         document.getElementById(this.array[firstElement].id).style.marginLeft = aux2.positionX + 'px';
-        document.getElementById(this.array[secondElement].id).style.transitionDuration = '1s';
+        //document.getElementById(this.array[secondElement].id).style.transitionDuration = '1s';
         document.getElementById(this.array[secondElement].id).style.marginLeft = aux.positionX + 'px';
 
         this.array[firstElement] = JSON.parse(JSON.stringify(aux2));
