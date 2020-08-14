@@ -28,7 +28,7 @@ class Generator {
         for (let i = 0; i < totalNumber; i++) {
             let rndNumber = this.getRandomNumber(0, this.maxNumber);
             let height = this.getHeight(rndNumber);
-            array.push(new Line(positionX, rndNumber, height, i));
+            array.push(new Line(positionX, rndNumber, height, 'l-' + i));
             positionX += 24;
         }
 

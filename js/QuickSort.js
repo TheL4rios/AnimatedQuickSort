@@ -4,37 +4,31 @@ class QuickSort {
     }
 
     sort = function() {
-        //this.quickSort(this.array, 0, this.array.length - 1);
-        this.swap(0, 1);
-        this.swap(1, 2);
-        //console.log(this.array);
+        this.quickSort(this.array, 0, this.array.length - 1);
     }
 
     quickSort = function(array, low, high) {
-        let pivote = array[high];
-        let i = low;
-        let j = high;
+        if (low < high) {
+            let pivote = JSON.parse(JSON.stringify(array[high]));
+            let i = low;
+            let j = high;
 
-        while (i < j) {
-            while (array[i].value <= pivote.value && i < j) i++;
-            while (array[j].value > pivote.value) j--;
-            if (i < j) {
-                this.swap(i, j);
+            while (i < j) {
+                while (array[i].value < pivote.value && i < high) i++;
+                while (array[j].value > pivote.value && j > low) j--;
+                if (i <= j) {
+                    this.swap(i, j);
+                    i++;
+                    j--;
+                }
             }
-        }
 
-        document.getElementById(this.array[j].id).style.transitionDuration = '1s';
-        document.getElementById(this.array[j].id).style.marginLeft = this.array[low].positionX + 'px';
-        array[low] = array[j];
-        array[j] = pivote;
-        document.getElementById(pivote.id).style.transitionDuration = '1s';
-        document.getElementById(pivote.id).style.marginLeft = this.array[j].positionX + 'px';
-
-        if (low < j - 1) {
-            this.quickSort(array, low, j - 1);
-        }
-        if (j + 1 < high) {
-            this.quickSort(array, j + 1, high);
+            if (low < j) {
+                this.quickSort(array, low, j);
+            }
+            if (i < high) {
+                this.quickSort(array, i, high);
+            }
         }
     }
 
