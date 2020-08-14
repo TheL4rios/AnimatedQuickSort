@@ -3,7 +3,7 @@ class Renderer {
         this.array = array;
     }
 
-    show = function() {
+    show() {
         let container = document.getElementById('container');
 
         this.array.forEach (function(line) {
@@ -12,7 +12,7 @@ class Renderer {
             div.id = line.id;
             div.style.height = line.height + 'px';
             div.style.marginLeft = line.positionX + 'px';
-            div.append(line.value);
+            // div.append(line.value);
 
             container.appendChild(div);
         })

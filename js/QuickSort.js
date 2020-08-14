@@ -3,36 +3,46 @@ class QuickSort {
         this.array = array;
     }
 
-    sort = function() {
+    sort() {
         this.quickSort(this.array, 0, this.array.length - 1);
     }
 
-    quickSort = function(array, low, high) {
+    async quickSort(array, low, high) {
         if (low < high) {
             let pivote = JSON.parse(JSON.stringify(array[high]));
             let i = low;
             let j = high;
 
+            for (let l = low; l <= high; l++) {
+                document.getElementById(array[l].id).style.backgroundColor = 'yellow';
+            }
+            document.getElementById(pivote.id).style.backgroundColor = 'red';
+
             while (i < j) {
                 while (array[i].value < pivote.value && i < high) i++;
                 while (array[j].value > pivote.value && j > low) j--;
                 if (i <= j) {
-                    this.swap(i, j);
+                    await this.swap(i, j);
                     i++;
                     j--;
                 }
             }
 
+            for (let l = low; l <= high; l++) {
+                document.getElementById(array[l].id).style.backgroundColor = 'white';
+            }
+
             if (low < j) {
-                this.quickSort(array, low, j);
+                await this.quickSort(array, low, j);
             }
             if (i < high) {
-                this.quickSort(array, i, high);
+                await this.quickSort(array, i, high);
             }
         }
     }
 
-    swap = function(firstElement, secondElement) {
+    async swap(firstElement, secondElement) {
+        await this.sleep(50);
         let aux = JSON.parse(JSON.stringify(this.array[firstElement]));
         let aux2 = JSON.parse(JSON.stringify(this.array[secondElement]));
 
@@ -45,5 +55,9 @@ class QuickSort {
         this.array[firstElement].positionX = aux.positionX;
         this.array[secondElement] = JSON.parse(JSON.stringify(aux));
         this.array[secondElement].positionX = aux2.positionX;
+    }
+
+    sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
     }
 }

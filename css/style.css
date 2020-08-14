@@ -5,9 +5,14 @@
     margin: 0px;
 }
 
+body {
+    background-color: #252525;
+}
+
 h1 {
     font-family: 'Lemonada', cursive;
     text-align: center;
+    color: blanchedalmond;
 }
 
 #container {
@@ -38,8 +43,8 @@ h1 {
 /********************LINES***************************/
 #container .line {
     position: fixed;
-    background-color: blue;
-    width: 20px;
+    background-color: white;
+    width: 10px;
     text-align: center;
     border-color: black;
     border-style: solid;
